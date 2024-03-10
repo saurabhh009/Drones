@@ -4,19 +4,15 @@ const UserSite = require("../Schemas/userSite");
 const DroneUpdate = async (req, res) => {
     try {
         const siteId = req.params.siteId;
-        const droneId = req.params.id;
+        const droneId = req.params.droneId; 
         const updates = req.body;
 
-        const checkUpdate = await UserSite.find({ site_id: updates.siteId });
+        const checkUpdate = await UserSite.find({ _id: updates.site }); 
 
-        if (!checkUpdate ) {
+        const userSite = checkUpdate;
+        if(!userSite)
+        {
             return res.status(404).json({ message: 'Site not found in user' });
-        }
-
-        const userSite = checkUpdate; 
-
-        if (!userSite.user_id==(req.userId)) {
-            return res.status(401).json({ message: 'Not a valid user-site association' });
         }
 
         const updatedDrone = await Drone.findOneAndUpdate({ _id: droneId, site: siteId }, updates, { new: true });
@@ -32,4 +28,5 @@ const DroneUpdate = async (req, res) => {
 };
 
 module.exports = DroneUpdate;
+
 
