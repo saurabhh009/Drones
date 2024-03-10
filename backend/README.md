@@ -37,8 +37,7 @@ Before running the Drone Management Backend, ensure you have the following insta
 
 ## Endpoints Documentation
 
-For documentation on available endpoints and how to use them, refer to the provided Postman collection link given below.
-https://winter-eclipse-855295.postman.co/workspace/New-Team-Workspace~ebc78682-be6f-4ee5-a14b-b13b142779d2/collection/31076875-611e2c65-47ad-41a4-825b-cb05882b5936?action=share&creator=31076875 
+For documentation on available endpoints and how to use them, refer to the provided Postman collection [here](https://winter-eclipse-855295.postman.co/workspace/New-Team-Workspace~ebc78682-be6f-4ee5-a14b-b13b142779d2/collection/31076875-611e2c65-47ad-41a4-825b-cb05882b5936?action=share&creator=31076875).
 
 ## Packages Used
 
