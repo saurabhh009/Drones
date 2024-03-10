@@ -9,14 +9,11 @@ const UpdateMission=async (req, res) => {
     const updates = req.body;
 
     try {
-        const updatedMission = await Mission.findOneAndUpdate({ _id: missionId, site: siteId }, updates, { new: true });
+        
         const checkSite=await UserSite.find({site:updates.siteId});
         const checkMission=await UserCat.find({category:updates.category});
         const checkDrone=await Drone.find({_id:updates.drone});
-
-        if (!updatedMission) {
-            return res.status(404).json({ message: 'Mission not found in the specified site' });
-        }
+        
         
         if(!checkSite)
         {
@@ -29,6 +26,12 @@ const UpdateMission=async (req, res) => {
         if(!checkDrone)
         {
             return res.status(404).json({ error: 'Drone not under user' });
+        }
+
+        const updatedMission = await Mission.findOneAndUpdate({ _id: missionId, site: siteId }, updates, { new: true });
+
+        if (!updatedMission) {
+            return res.status(404).json({ message: 'Mission not found in the specified site' });
         }
         res.json(updatedMission);
     } catch (error) {
