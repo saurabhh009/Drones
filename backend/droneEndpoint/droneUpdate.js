@@ -1,4 +1,5 @@
 const Drone = require("../Schemas/drone");
+const UserSite=require("../Schemas/userSite");
 
 const DroneUpdate = async (req, res) => {
     try {
@@ -9,6 +10,14 @@ const DroneUpdate = async (req, res) => {
 
         if (!updatedDrone) {
             return res.status(404).json({ message: 'Drone not found in the specified site' });
+        }
+        const checkUpdate=await UserSite.find({ site_id: updates.siteId});
+        if(!checkUpdate)
+        {
+            return res.status(404).json({ message: 'Site not found in user' });
+        }
+        if (!checkUpdate.user_id.equals(req.userId)) {
+            return res.status(401).json({ message: 'Not a valid user-site association' });
         }
 
         res.json(updatedDrone);

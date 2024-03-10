@@ -8,6 +8,11 @@ const UserCatUpdate=async (req, res) => {
         if (!userCategory) {
             return res.status(404).json({ error: 'User-category association not found' });
         }
+        const checkUpdate=await UserCat.findById(updates.category);
+        if(!checkUpdate)
+        {
+            return res.status(404).json({ error: 'Category not under the user' });
+        }
         await UserCat.findByIdAndUpdate(id, updates, { new: true });
         
         res.json({ message: 'User-category association updated successfully' });
